@@ -1,0 +1,100 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-sm-8">
+      <div [hidden]="submitted">
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+          <div>
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Name"
+                id="fullname"
+                name="fullname"
+                formControlName="fullname"
+              />
+              <small
+                [hidden]="!f.fullname.invalid || !f.fullname.touched"
+                class="alert alert-danger"
+              >
+                Full Name is required
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Username"
+                id="username"
+                formControlName="username"
+              />
+              <small
+                [hidden]="!f.username.invalid || !f.username.touched"
+                class="alert alert-danger"
+              >
+                Userame is required
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter Email"
+                id="email"
+                formControlName="email"
+              />
+              <small
+                [hidden]="!f.email.invalid || !f.email.touched"
+                class="alert alert-danger"
+              >
+                Name is required
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter Password"
+                id="password"
+                formControlName="password"
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                f.password.invalid && (f.password.touched || f.password.dirty)
+              "
+            >
+              <div *ngIf="f.password.hasError('required')">
+                password is required
+              </div>
+              <div
+                class="error-text"
+                *ngIf="f.password.hasError('passwordStrength')"
+              >
+                {{ f.password.errors['passwordStrength'] }}
+                <strong>
+                  {{ f.password.errors['passwordStrengthValue'] }}
+                </strong>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!signupForm.valid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
